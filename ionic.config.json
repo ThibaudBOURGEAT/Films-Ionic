@@ -1,0 +1,7 @@
+{
+  "name": "TBOU_films",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
