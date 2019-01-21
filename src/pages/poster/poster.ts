@@ -34,4 +34,8 @@ export class PosterPage {
   public getFilm = () =>{
     return this.film;
   }
+
+  public goBack = () =>{
+    this.navCtrl.pop();
+  }
 }

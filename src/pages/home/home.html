@@ -7,12 +7,11 @@
   </ion-list>
   <ion-list *ngIf="getFilms() != null">
     <div *ngFor="let film of getFilms()">
-      <ion-card (click)="goToPosterOfFilm(film.imdbID)" >
+      <ion-card *ngIf="film.Response == 'True'" (click)="goToPosterOfFilm(film.imdbID)" >
         <ion-card-title>
         {{ film.Title }}
         </ion-card-title>
       </ion-card>
     </div>
   </ion-list>
-  Test
 </ion-content>
