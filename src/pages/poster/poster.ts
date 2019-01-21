@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { OMDbApiProvider } from '../../providers/OMDb-api/OMDb-api';
 
 @Component({

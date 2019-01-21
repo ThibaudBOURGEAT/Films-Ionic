@@ -17,10 +17,16 @@ export class HomePage {
     private navCtrl: NavController) {
       this.displaySearchbar = false;
       this.onDisplaySearchbar();
+      this.getManyFilms(10);
     }
 
-    ngOnInit() {
-      this.getManyFilms(10);
+    public searchFilms = (ev: any) =>{
+      const val = ev.target.value;
+      if (val && val.trim() != '' && this.films != null) {
+        this.films = this.films.filter((film) => {
+          return (film.Title.toLowerCase().indexOf(val.toLowerCase()) > -1);
+        })
+      }
     }
 
     private onDisplaySearchbar = () =>{
