@@ -8,12 +8,14 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { PosterPage } from '../pages/poster/poster';
 import { OMDbApiProvider } from '../providers/OMDb-api/OMDb-api';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    PosterPage
   ],
   imports: [
     BrowserModule,
@@ -23,7 +25,8 @@ import { OMDbApiProvider } from '../providers/OMDb-api/OMDb-api';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    PosterPage
   ],
   providers: [
     StatusBar,

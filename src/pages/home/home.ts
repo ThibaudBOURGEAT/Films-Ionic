@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { AlertController, Events } from 'ionic-angular';
+import { AlertController, Events, NavController } from 'ionic-angular';
 import { OMDbApiProvider } from '../../providers/OMDb-api/OMDb-api';
+import { PosterPage } from '../poster/poster';
 
 @Component({
   selector: 'page-home',
@@ -12,7 +13,8 @@ export class HomePage {
   private films:any;
 
   constructor(private omdb: OMDbApiProvider,
-    private alertCtrl: AlertController, private events: Events) {
+    private alertCtrl: AlertController, private events: Events,
+    private navCtrl: NavController) {
       this.displaySearchbar = false;
       this.onDisplaySearchbar();
     }
@@ -26,6 +28,10 @@ export class HomePage {
         console.log('displaySearchbar', res);
         this.displaySearchbar = res;
       });
+    }
+
+    public goToPosterOfFilm = (idFilm: string) =>{
+      this.navCtrl.push(PosterPage, {id: idFilm});
     }
 
     public getDisplaySearchbar = () =>{
