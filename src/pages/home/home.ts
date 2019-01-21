@@ -8,10 +8,12 @@ import { OMDbApiProvider } from '../../providers/OMDb-api/OMDb-api';
 })
 export class HomePage {
 
-  displaySearchbar:boolean;
+  private displaySearchbar:boolean;
+  private films:any;
 
   constructor(private omdb: OMDbApiProvider,
     private alertCtrl: AlertController, private events: Events) {
+      this.displaySearchbar = false;
       this.onDisplaySearchbar();
     }
 
@@ -26,10 +28,19 @@ export class HomePage {
       });
     }
 
+    public getDisplaySearchbar = () =>{
+      return this.displaySearchbar;
+    }
+
+    public getFilms = () =>{
+      return this.films;
+    }
+
     public getManyFilms = (nbFilms:Number) =>{
       this.omdb.getManyFilms(nbFilms)
       .then((data)=>{
         console.log(data);
+        this.films = data;
       })
       .catch((err)=>{
         const alert = this.alertCtrl.create({

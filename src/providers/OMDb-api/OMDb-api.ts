@@ -20,7 +20,7 @@ export class OMDbApiProvider {
     return new Promise((resolve,reject)=>{
       var films = [];
       for(var i = 0; i < nbFilm; i++){
-        this.getOneFilm()
+        this.getFilmById(getRandomID().toString())
         .then((data)=>{ films.push(data); })
         .catch((err)=>{ reject(err) })
         .then(()=>{
@@ -30,9 +30,9 @@ export class OMDbApiProvider {
     });
   }
 
-  public getOneFilm(){
+  public getFilmById(id:string){
     return new Promise((resolve, reject) =>{
-      this.http.get(this.urlAPI + getRandomID().toString())
+      this.http.get(this.urlAPI + id)
       .subscribe((data)=>{
         resolve(data);
       },(err)=>{
