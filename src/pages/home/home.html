@@ -1,4 +1,10 @@
 <menu></menu>
 <ion-content padding>
+  <ion-searchbar *ngIf="displaySearchbar" (ionInput)="getItems($event)"></ion-searchbar>
+  <ion-list>
+    <ion-item *ngFor="let item of items">
+      {{ item }}
+    </ion-item>
+  </ion-list>
   Test
 </ion-content>

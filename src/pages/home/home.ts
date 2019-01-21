@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AlertController } from 'ionic-angular';
+import { AlertController, Events } from 'ionic-angular';
 import { OMDbApiProvider } from '../../providers/OMDb-api/OMDb-api';
 
 @Component({
@@ -8,30 +8,38 @@ import { OMDbApiProvider } from '../../providers/OMDb-api/OMDb-api';
 })
 export class HomePage {
 
+  displaySearchbar:boolean;
+
   constructor(private omdb: OMDbApiProvider,
-    private alertCtrl: AlertController) {
+    private alertCtrl: AlertController, private events: Events) {
+      this.onDisplaySearchbar();
+    }
 
-    console.log("construct");
-  }
+    ngOnInit() {
+      this.getManyFilms(10);
+    }
 
-  ngOnInit() {
-    this.getManyFilms(10);
-  }
-
-  public getManyFilms(nbFilms:Number){
-    this.omdb.getManyFilms(nbFilms)
-    .then((data)=>{
-      console.log(data);
-    })
-    .catch((err)=>{
-      const alert = this.alertCtrl.create({
-        title: 'Erreur !',
-        subTitle: 'Impossible de récuperer les actualités!',
-        buttons: ['OK']
+    private onDisplaySearchbar = () =>{
+      this.events.subscribe('displaySearchbar', (res) => {
+        console.log('displaySearchbar', res);
+        this.displaySearchbar = res;
       });
-      alert.present();
-      console.error(err);
-    });
-  }
+    }
 
-}
+    public getManyFilms = (nbFilms:Number) =>{
+      this.omdb.getManyFilms(nbFilms)
+      .then((data)=>{
+        console.log(data);
+      })
+      .catch((err)=>{
+        const alert = this.alertCtrl.create({
+          title: 'Erreur !',
+          subTitle: 'Impossible de récuperer les actualités!',
+          buttons: ['OK']
+        });
+        alert.present();
+        console.error(err);
+      });
+    }
+
+  }
