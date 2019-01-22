@@ -11,7 +11,8 @@ import { getRandomID } from '../../helpers/randomID';
 @Injectable()
 export class OMDbApiProvider {
 
-  private urlAPI:String = "http://www.omdbapi.com/?apikey=75522b56&i=";
+  private urlAPIFilm:String = "http://www.omdbapi.com/?apikey=75522b56&";
+  private urlAPIPoster:String = "http://img.omdbapi.com/?apikey=75522b56&";
 
   constructor(private http: HttpClient) {
   }
@@ -32,7 +33,7 @@ export class OMDbApiProvider {
 
   public getFilmById(id:string){
     return new Promise((resolve, reject) =>{
-      this.http.get(this.urlAPI + id)
+      this.http.get(this.urlAPIFilm + "i=" + id)
       .subscribe((data)=>{
         resolve(data);
       },(err)=>{
@@ -40,4 +41,5 @@ export class OMDbApiProvider {
       });
     });
   }
+  
 }

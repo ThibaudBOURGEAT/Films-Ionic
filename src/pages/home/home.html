@@ -7,10 +7,13 @@
   </ion-list>
   <ion-list *ngIf="getFilms() != null">
     <div *ngFor="let film of getFilms()">
-      <ion-card *ngIf="film.Response == 'True'" (click)="goToPosterOfFilm(film.imdbID)" >
-        <ion-card-title>
-        {{ film.Title }}
-        </ion-card-title>
+      <ion-card *ngIf="film.Response == 'True'" (click)="goToPosterOfFilm(film)" >
+        <img *ngIf="film.Poster != 'N/A'" src="{{getPoster(film.imdbID)}}"/>
+        <ion-card-content>
+          <ion-card-title>
+            <b>Titre : </b>{{ film.Title }}
+          </ion-card-title>
+        </ion-card-content>
       </ion-card>
     </div>
   </ion-list>

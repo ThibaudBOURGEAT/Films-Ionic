@@ -1,3 +1,4 @@
+<ion-nav id="nav" #content [root]="rootPage"></ion-nav>
 <ion-header>
   <ion-navbar>
     <button ion-button menuToggle>
@@ -5,7 +6,7 @@
     </button>
     <ion-title>AppATrax</ion-title>
     <ion-buttons end>
-      <button icon-only ion-button (click)="emitDisplaySearchbar()">
+      <button icon-only ion-button (click)="goTo(pages.home)">
         <ion-icon class="menu-icon" md="md-search"></ion-icon>
       </button>
     </ion-buttons>
@@ -31,14 +32,3 @@
     </ion-list>
   </ion-content>
 </ion-menu>
-
-<ion-nav id="nav" #content [root]="rootPage"></ion-nav>
-
-<ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
-<ion-list>
-  <ion-item *ngFor="let item of items">
-    {{ item }}
-  </ion-item>
-</ion-list>
-
-<ion-nav [root]="rootPage"></ion-nav>

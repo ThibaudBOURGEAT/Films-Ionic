@@ -18,8 +18,6 @@ export class MyApp {
   constructor(menuCtrl: MenuController, platform: Platform,
     statusBar: StatusBar, splashScreen: SplashScreen, private events: Events) {
     platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
     });
@@ -27,13 +25,10 @@ export class MyApp {
 
   public emitDisplaySearchbar = () => {
     if(this.displaySearchbar){
-      console.log("2");
       this.displaySearchbar = false;
     }else{
-      console.log("3");
       this.displaySearchbar = true;
     }
-    console.log("4",this.displaySearchbar);
     this.events.publish('displaySearchbar', this.displaySearchbar);
   }
 

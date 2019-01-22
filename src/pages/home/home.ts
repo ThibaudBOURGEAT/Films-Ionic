@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { AlertController, Events, NavController } from 'ionic-angular';
+import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 import { OMDbApiProvider } from '../../providers/OMDb-api/OMDb-api';
-import { PosterPage } from '../poster/poster';
+import { DescribePage } from '../describe/describe';
 
 @Component({
   selector: 'page-home',
@@ -14,10 +15,11 @@ export class HomePage {
 
   constructor(private omdb: OMDbApiProvider,
     private alertCtrl: AlertController, private events: Events,
-    private navCtrl: NavController) {
+    private navCtrl: NavController, private nativePageTransitions: NativePageTransitions) {
       this.displaySearchbar = false;
       this.onDisplaySearchbar();
       this.getManyFilms(10);
+      console.log("HOME");
     }
 
     public searchFilms = (ev: any) =>{
@@ -25,19 +27,28 @@ export class HomePage {
       if (val && val.trim() != '' && this.films != null) {
         this.films = this.films.filter((film) => {
           return (film.Title.toLowerCase().indexOf(val.toLowerCase()) > -1);
-        })
+        });
       }
     }
 
     private onDisplaySearchbar = () =>{
       this.events.subscribe('displaySearchbar', (res) => {
-        console.log('displaySearchbar', res);
         this.displaySearchbar = res;
       });
     }
 
-    public goToPosterOfFilm = (idFilm: string) =>{
-      this.navCtrl.push(PosterPage, {id: idFilm});
+    public goToPosterOfFilm = (film: any) =>{
+      let options: NativeTransitionOptions = {
+        direction: 'left',
+        duration: 600
+      };
+
+      this.nativePageTransitions.flip(options);
+      this.navCtrl.push(DescribePage, {film: film});
+    }
+
+    public getPoster = (id:string) =>{
+      return "http://img.omdbapi.com/?apikey=75522b56&i=" + id;
     }
 
     public getDisplaySearchbar = () =>{
@@ -57,7 +68,7 @@ export class HomePage {
       .catch((err)=>{
         const alert = this.alertCtrl.create({
           title: 'Erreur !',
-          subTitle: 'Impossible de récuperer les actualités!',
+          subTitle: 'Impossible de récuperer les actualités !',
           buttons: ['OK']
         });
         alert.present();

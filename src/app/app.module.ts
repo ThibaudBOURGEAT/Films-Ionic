@@ -5,17 +5,18 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
+import { NativePageTransitions } from '@ionic-native/native-page-transitions';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { PosterPage } from '../pages/poster/poster';
+import { DescribePage } from '../pages/describe/describe';
 import { OMDbApiProvider } from '../providers/OMDb-api/OMDb-api';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    PosterPage
+    DescribePage
   ],
   imports: [
     BrowserModule,
@@ -26,14 +27,15 @@ import { OMDbApiProvider } from '../providers/OMDb-api/OMDb-api';
   entryComponents: [
     MyApp,
     HomePage,
-    PosterPage
+    DescribePage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     OMDbApiProvider,
-    HttpClient
+    HttpClient,
+    NativePageTransitions
   ]
 })
 export class AppModule {}
