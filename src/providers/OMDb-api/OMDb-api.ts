@@ -23,20 +23,22 @@ export class OMDbApiProvider {
       for(var i = 0; i < nbFilm; i++){
         this.getFilmById("tt" + getRandomID().toString())
         .then((data)=>{
-           this.getPosterById(data.imdbID)
-           .then((poster) =>{
-             data.Poster = poster;
-             films.push(data);
-           })
-           .catch((err) =>{
-             if(data.Poster == "N/A"){
-               data.Poster = "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Pas_d%27image_disponible.svg/768px-Pas_d%27image_disponible.svg.png";
-             }
-             films.push(data);
-           })
-           .then(() =>{
-             if(films.length == nbFilm){resolve(films);}
-           });
+          if(data.Response == "True"){
+            this.getPosterById(data.imdbID)
+            .then((poster) =>{
+              data.Poster = poster;
+              films.push(data);
+            })
+            .catch((err) =>{
+              if(data.Poster == "N/A"){
+                data.Poster = "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Pas_d%27image_disponible.svg/768px-Pas_d%27image_disponible.svg.png";
+              }
+              films.push(data);
+            })
+            .then(() =>{
+              if(films.length == nbFilm){resolve(films);}
+            });
+          }
         })
         .catch((err)=>{ reject(err) });
       }

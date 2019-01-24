@@ -8,7 +8,7 @@
   <ion-list *ngIf="getFilms() != null">
     <div *ngFor="let film of getFilms()">
       <ion-card *ngIf="film.Response == 'True'" (click)="goToPosterOfFilm(film)" >
-        <img src="{{getPoster(film)}}"/>
+        <img *ngIf="film.Poster != null" src="{{getPoster(film)}}"/>
         <ion-card-content>
           <ion-card-title>
             <b>Titre : </b>{{ film.Title }}
