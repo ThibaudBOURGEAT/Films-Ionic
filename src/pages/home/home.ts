@@ -8,20 +8,19 @@ import { OMDbApiProvider } from '../../providers/OMDb-api/OMDb-api';
 })
 export class HomePage {
 
+  public films:any;
+
   constructor(private omdb: OMDbApiProvider,
     private alertCtrl: AlertController) {
-
-    console.log("construct");
-  }
-
-  ngOnInit() {
     this.getManyFilms(10);
+    console.log("construct");
   }
 
   public getManyFilms(nbFilms:Number){
     this.omdb.getManyFilms(nbFilms)
     .then((data)=>{
-      console.log(data);
+      this.films = data;
+      console.log(this.films);
     })
     .catch((err)=>{
       const alert = this.alertCtrl.create({

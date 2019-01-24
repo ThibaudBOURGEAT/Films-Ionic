@@ -1,4 +1,13 @@
 <menu></menu>
 <ion-content padding>
-  Test
+  <div *ngIf="films != null">
+    <ion-card *ngFor="let film of films">
+      <!--<img src="img/nin-live.png"/>-->
+      <ion-card-content>
+        <ion-card-title>
+          {{film.Title}}
+        </ion-card-title>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>
