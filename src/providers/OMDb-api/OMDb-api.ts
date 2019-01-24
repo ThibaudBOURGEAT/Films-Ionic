@@ -11,7 +11,8 @@ import { getRandomID } from '../../helpers/randomID';
 @Injectable()
 export class OMDbApiProvider {
 
-  private urlAPI:String = "http://www.omdbapi.com/?apikey=75522b56&i=tt";
+  private urlAPIFilm:String = "http://www.omdbapi.com/?apikey=75522b56&";
+  private urlAPIPoster:String = "http://img.omdbapi.com/?apikey=75522b56&";
 
   constructor(private http: HttpClient) {
   }
@@ -20,19 +21,31 @@ export class OMDbApiProvider {
     return new Promise((resolve,reject)=>{
       var films = [];
       for(var i = 0; i < nbFilm; i++){
-        this.getFilmById(getRandomID().toString())
-        .then((data)=>{ films.push(data); })
-        .catch((err)=>{ reject(err) })
-        .then(()=>{
-          if(films.length == nbFilm){resolve(films);}
-        });
+        this.getFilmById("tt" + getRandomID().toString())
+        .then((data)=>{
+           this.getPosterById(data.imdbID)
+           .then((poster) =>{
+             data.Poster = poster;
+             films.push(data);
+           })
+           .catch((err) =>{
+             if(data.Poster == "N/A"){
+               data.Poster = "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Pas_d%27image_disponible.svg/768px-Pas_d%27image_disponible.svg.png";
+             }
+             films.push(data);
+           })
+           .then(() =>{
+             if(films.length == nbFilm){resolve(films);}
+           });
+        })
+        .catch((err)=>{ reject(err) });
       }
     });
   }
 
-  public getFilmById(id:String){
+  public getFilmById = (id:string) =>{
     return new Promise((resolve, reject) =>{
-      this.http.get(this.urlAPI + id)
+      this.http.get(this.urlAPIFilm + "i=" + id)
       .subscribe((data)=>{
         resolve(data);
       },(err)=>{
@@ -40,4 +53,17 @@ export class OMDbApiProvider {
       });
     });
   }
+
+  public getPosterById = (id: string) =>{
+    return new Promise((resolve, reject)=>{
+      this.http.get(this.urlAPIPoster + "i=" + id ,
+      { responseType: 'blob' })
+      .subscribe((data)=>{
+        resolve(this.urlAPIPoster + "i=" + id);
+      }, (err)=>{
+        reject(err);
+      });
+    });
+  }
+
 }

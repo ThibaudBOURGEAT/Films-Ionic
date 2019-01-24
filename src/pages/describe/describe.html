@@ -1,0 +1,13 @@
+<ion-content padding>
+  <ion-card *ngIf="getFilm() != null">
+    <img *ngIf="getPoster() != null" src="{{getPoster()}}"/>
+    <ion-card-content>
+      <ion-card-title>
+        <b>Titre : </b>{{getFilm().Title}}
+      </ion-card-title>
+    </ion-card-content>
+  </ion-card>
+  <ion-fab right bottom>
+    <button ion-fab color="dark" (click)="goBack()"><ion-icon name="arrow-dropleft"></ion-icon></button>
+  </ion-fab>
+</ion-content>

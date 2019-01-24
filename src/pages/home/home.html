@@ -1,13 +1,20 @@
-<menu></menu>
 <ion-content padding>
-  <div *ngIf="films != null">
-    <ion-card *ngFor="let film of films">
-      <!--<img src="img/nin-live.png"/>-->
-      <ion-card-content>
-        <ion-card-title>
-          {{film.Title}}
-        </ion-card-title>
-      </ion-card-content>
-    </ion-card>
-  </div>
+  <ion-searchbar *ngIf="getDisplaySearchbar()" (ionInput)="searchFilms($event)"></ion-searchbar>
+  <ion-list>
+    <ion-item *ngFor="let item of items">
+      {{ item }}
+    </ion-item>
+  </ion-list>
+  <ion-list *ngIf="getFilms() != null">
+    <div *ngFor="let film of getFilms()">
+      <ion-card *ngIf="film.Response == 'True'" (click)="goToPosterOfFilm(film)" >
+        <img src="{{getPoster(film)}}"/>
+        <ion-card-content>
+          <ion-card-title>
+            <b>Titre : </b>{{ film.Title }}
+          </ion-card-title>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </ion-list>
 </ion-content>
