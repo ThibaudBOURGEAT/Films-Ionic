@@ -8,15 +8,19 @@ import { HttpClientModule } from '@angular/common/http';
 import { NativePageTransitions } from '@ionic-native/native-page-transitions';
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
 import { DescribePage } from '../pages/describe/describe';
+import { FilmsPage } from '../pages/films/films';
+import { SeriesPage } from '../pages/series/series';
+import { TabsComponent } from '../components/tabs/tabs';
 import { OMDbApiProvider } from '../providers/OMDb-api/OMDb-api';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
-    DescribePage
+    DescribePage,
+    FilmsPage,
+    SeriesPage,
+    TabsComponent
   ],
   imports: [
     BrowserModule,
@@ -26,8 +30,10 @@ import { OMDbApiProvider } from '../providers/OMDb-api/OMDb-api';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
-    DescribePage
+    DescribePage,
+    FilmsPage,
+    SeriesPage,
+    TabsComponent
   ],
   providers: [
     StatusBar,

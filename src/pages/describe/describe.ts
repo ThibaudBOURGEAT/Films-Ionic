@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, AlertController, NavParams } from 'ionic-angular';
 import { OMDbApiProvider } from '../../providers/OMDb-api/OMDb-api';
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 
@@ -12,21 +12,32 @@ export class DescribePage {
   film:any;
   poster:string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-    private nativePageTransitions: NativePageTransitions) {
-      this.film = navParams.get('film');
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    private alertCtrl: AlertController,
+    private nativePageTransitions: NativePageTransitions,
+    private omdb: OMDbApiProvider) {
+      let id = navParams.get('id');
+      this.getFilm(id);
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad PosterPage');
-  }
-
-  public getFilm = () =>{
+  public Film = () =>{
     return this.film;
   }
 
-  public getPoster = () =>{
-    return this.film.Poster;
+  private getFilm = (id:string) =>{
+    this.omdb.getFilmById(id)
+    .then((film) =>{
+      this.film = film; 
+    })
+    .catch((err) =>{
+      const alert = this.alertCtrl.create({
+        title: 'Erreur !',
+        subTitle: 'Impossible de récuperer les informations du film !',
+        buttons: ['OK']
+      });
+      alert.present();
+    })
   }
 
   public goBack = () =>{

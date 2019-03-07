@@ -1,5 +1,7 @@
-import { HomePage } from '../pages/home/home';
+import { FilmsPage } from '../pages/films/films';
+import { SeriesPage } from '../pages/series/series';
 
 export const PAGES = {
-  home: HomePage
+  films: FilmsPage,
+  series: SeriesPage
 }
