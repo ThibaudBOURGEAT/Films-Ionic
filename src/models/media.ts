@@ -1,10 +1,10 @@
-export class media {
-    private id: string;
-    private title: string;
-    private poster: string;
-    private description: string;
-    private date: string;
-    private typeMedia: string; 
+export class Media {
+    protected id: string;
+    protected title: string;
+    protected poster: string;
+    protected description: string;
+    protected date: string;
+    protected typeMedia: string; 
 
     constructor(title:string, poster:string, 
         description:string, date:string, id:string){
