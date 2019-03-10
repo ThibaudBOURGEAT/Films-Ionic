@@ -1,6 +1,6 @@
 import { Media } from "./media";
 
-export class Film extends Media{
+export class Movie extends Media{
 
     private runTime: string;
 

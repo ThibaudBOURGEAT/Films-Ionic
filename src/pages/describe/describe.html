@@ -6,40 +6,40 @@
 
 <ion-content padding>
   <ion-card *ngIf="Media() != null">
-    <img *ngIf="Media().Poster != null" src="{{Media().Poster}}"/>
+    <img *ngIf="Media().Poster != null" src="{{Media().poster}}"/>
     <ion-card-content>
       <ion-card-title>
-        <b>Titre : </b>{{Media().Title}}
+        <b>Titre : </b>{{Media().title}}
       </ion-card-title>
       <p>
-        <b>Description : </b> {{Media().Plot}}
+        <b>Description : </b> {{Media().description}}
       </p>
       <p>
-        <b>Date de Sortie : </b> {{Media().Year}}
+        <b>Date de Sortie : </b> {{Media().date}}
       </p>
       <p>
-        <b>Recommandation d'âge : </b> {{Media().Rated}}
+        <b>Recommandation d'âge : </b> {{Media().rated}}
       </p>
       <p>
-        <b>Genre : </b> {{Media().Genre}}
+        <b>Genre : </b> {{Media().genre}}
       </p>
       <p *ngIf="typeMedia == 'movie'">
-        <b>Durée : </b> {{Media().Runtime}}
+        <b>Durée : </b> {{Media().runTime}}
       </p>
       <p>
-        <b>Producteur : </b> {{Media().Director}}
+        <b>Producteur : </b> {{Media().producer}}
       </p>
       <p>
-        <b>Acteurs : </b> {{Media().Actors}}
+        <b>Acteurs : </b> {{Media().actors}}
       </p>
       <p>
-        <b>Nominations : </b> {{Media().Awards}}
+        <b>Nominations : </b> {{Media().awards}}
       </p>
       <p>
         <b>Note IMDB : </b> {{Media().imdbRating}}
       </p>
       <p>
-        <b>Site Web : </b> {{Media().Website}}
+        <b>Site Web : </b> {{Media().webSite}}
       </p>
     </ion-card-content>
   </ion-card>

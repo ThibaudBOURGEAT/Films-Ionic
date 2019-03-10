@@ -14,7 +14,7 @@ export class Media {
     protected webSite: string;
 
     constructor(media: object){
-            this.id = media['id'];
+            this.id = media['imdbID'];
             this.title = media['Title'];
             this.poster = media['Poster'];
             this.description = media['Plot'];
