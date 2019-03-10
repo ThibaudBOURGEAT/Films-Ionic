@@ -5,17 +5,41 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-card *ngIf="Film() != null">
-    <img *ngIf="Film().Poster != null" src="{{Film().Poster}}"/>
+  <ion-card *ngIf="Media() != null">
+    <img *ngIf="Media().Poster != null" src="{{Media().Poster}}"/>
     <ion-card-content>
       <ion-card-title>
-        <b>Titre : </b>{{Film().Title}}
+        <b>Titre : </b>{{Media().Title}}
       </ion-card-title>
       <p>
-        <b>Description : </b> {{Film().Plot}}
+        <b>Description : </b> {{Media().Plot}}
       </p>
       <p>
-        <b>Date de réalisation : </b> {{Film().Released}}
+        <b>Date de Sortie : </b> {{Media().Year}}
+      </p>
+      <p>
+        <b>Recommandation d'âge : </b> {{Media().Rated}}
+      </p>
+      <p>
+        <b>Genre : </b> {{Media().Genre}}
+      </p>
+      <p *ngIf="typeMedia == 'movie'">
+        <b>Durée : </b> {{Media().Runtime}}
+      </p>
+      <p>
+        <b>Producteur : </b> {{Media().Director}}
+      </p>
+      <p>
+        <b>Acteurs : </b> {{Media().Actors}}
+      </p>
+      <p>
+        <b>Nominations : </b> {{Media().Awards}}
+      </p>
+      <p>
+        <b>Note IMDB : </b> {{Media().imdbRating}}
+      </p>
+      <p>
+        <b>Site Web : </b> {{Media().Website}}
       </p>
     </ion-card-content>
   </ion-card>
