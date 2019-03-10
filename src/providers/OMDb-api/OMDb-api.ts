@@ -67,4 +67,15 @@ export class OMDbApiProvider {
         });
     });
   }
+
+  public getSaisonByNumberOfSerie = (id: string, nbSaison: number) =>{
+    return new Promise((resolve, reject) =>{
+      this.http.get(this.urlAPIFilm + "i=" + id + "&Season=" + nbSaison)
+      .subscribe((data) =>{
+        resolve(data);
+      },(err) =>{
+        reject(err);
+      })
+    });
+  }
 }

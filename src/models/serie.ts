@@ -1,9 +1,16 @@
 import { Media } from "./media";
+import { Episode } from "./episode";
 
 export class Serie extends Media{
-    constructor(title: string, poster:string,
-        description:string, date:string, id:string){
-        super(title, poster, description, date, id);
+
+    private totalSeasons: number;
+    private saisons: Episode[][];
+
+    constructor(serie: object, saisons: Episode[][]){
+        super(serie);
         this.typeMedia = "serie";
+        this.totalSeasons = Number(serie['totalSeasons']);
+        this.saisons = saisons;
+        console.log("episode",this.totalSeasons);
     }
 }

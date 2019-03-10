@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { NavController, AlertController, NavParams } from 'ionic-angular';
 import { OMDbApiProvider } from '../../providers/OMDb-api/OMDb-api';
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
+import { Serie } from '../../models/serie';
+import { Movie } from  '../../models/movie';
+import { Episode } from '../../models/episode';
 
 @Component({
   selector: 'page-describe',
@@ -9,7 +12,7 @@ import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/na
 })
 export class DescribePage {
 
-  private media:any;
+  private media:object;
   private typeMedia: string;
 
   constructor(public navCtrl: NavController,
@@ -29,10 +32,14 @@ export class DescribePage {
   private getMedia = (id:string) =>{
     this.omdb.getMediaById(id)
     .then((media) =>{
-      console.log("media", media);
-      this.media = media; 
+      if(this.typeMedia == "movie"){
+        this.media = new Movie(media);
+      } else {
+        this.getSaisons(media);
+      }
     })
     .catch((err) =>{
+      console.log("getMedia", err);
       const alert = this.alertCtrl.create({
         title: 'Erreur !',
         subTitle: "Impossible de récuperer les informations de l'oeuvre !",
@@ -40,6 +47,32 @@ export class DescribePage {
       });
       alert.present();
     })
+  }
+
+  private getSaisons = (serie:object) =>{
+    let lenght = Number(serie['totalSeasons']);
+    let saisons: Episode[][] = new Array();
+    for(let i:number = 0; i < lenght; i++){
+      this.omdb.getSaisonByNumberOfSerie(serie['imdbID'],i+1)
+      .then((value) => {
+        let saison: Episode[] = new Array();
+        value['Episodes'].forEach(epi => {
+          let episode = new Episode(epi);
+          saison.push(episode);
+        });
+        saisons.push(saison);
+      })
+      .catch((err) =>{
+        console.log("getSaisons", err);
+        const alert = this.alertCtrl.create({
+          title: 'Erreur !',
+          subTitle: "Impossible de récuperer les informations de la saison "+ i+1 +" !",
+          buttons: ['OK']
+        });
+        alert.present();
+      });
+    }
+    this.media = new Serie(serie, saisons);
   }
 
   public goBack = () =>{
