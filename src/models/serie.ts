@@ -11,6 +11,5 @@ export class Serie extends Media{
         this.typeMedia = "serie";
         this.totalSeasons = Number(serie['totalSeasons']);
         this.saisons = saisons;
-        console.log("episode",this.totalSeasons);
     }
 }

@@ -18,14 +18,15 @@ export class OMDbApiProvider {
             this.getPosterById(data['imdbID'])
                 .then((poster) => {
                   data['Poster'] = poster;
+                  resolve(data);
                 })
                 .catch((err) => {
                   if(data['Poster'] == "N/A"){
                     data['Poster'] = "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Pas_d%27image_disponible.svg/768px-Pas_d%27image_disponible.svg.png";
                   } 
+                  resolve(data);
                 });
           }
-          resolve(data);
         }, (err) => {
           reject(err);
         });
@@ -53,15 +54,16 @@ export class OMDbApiProvider {
               this.getPosterById(media['imdbID'])
                 .then((poster) => {
                   media['Poster'] = poster;
+                  resolve(data);
                 })
                 .catch((err) => {
                   if(media['Poster'] == "N/A"){
                     media['Poster'] = "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Pas_d%27image_disponible.svg/768px-Pas_d%27image_disponible.svg.png";
                   } 
+                  resolve(data);
                 });
             });
           }
-          resolve(data);
         }, (err) => {
           reject(err);
         });
