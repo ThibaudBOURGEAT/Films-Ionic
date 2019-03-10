@@ -9,8 +9,8 @@ import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/na
 })
 export class DescribePage {
 
-  media:any;
-  poster:string;
+  private media:any;
+  private typeMedia: string;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -18,6 +18,7 @@ export class DescribePage {
     private nativePageTransitions: NativePageTransitions,
     private omdb: OMDbApiProvider) {
       let id = navParams.get('id');
+      this.typeMedia = navParams.get('typeMedia');
       this.getMedia(id);
   }
 
