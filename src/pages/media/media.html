@@ -10,14 +10,14 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-searchbar *ngIf="DisplaySearchbar()" (ionInput)="searchFilms($event)"></ion-searchbar>
-    <ion-list *ngIf="Films() != null">
-      <div *ngFor="let film of Films()">
-        <ion-card *ngIf="film != null" (click)="goToDescribeOfFilm(film.imdbID)" >
-          <img *ngIf="film.Poster != null" src="{{film.Poster}}"/>
+    <ion-searchbar *ngIf="DisplaySearchbar()" (ionInput)="searchMedias($event)"></ion-searchbar>
+    <ion-list *ngIf="Medias() != null">
+      <div *ngFor="let media of Medias()">
+        <ion-card *ngIf="media != null" (click)="goToDescribeOfMedia(media.imdbID)" >
+          <img *ngIf="media.Poster != null" src="{{media.Poster}}"/>
           <ion-card-content>
             <ion-card-title>
-              <b>Titre : </b>{{ film.Title }}
+              <b>Titre : </b>{{ media.Title }}
             </ion-card-title>
           </ion-card-content>
         </ion-card>

@@ -15,7 +15,7 @@ export class OMDbApiProvider {
     return new Promise((resolve,reject)=>{
       var films = [];
       for(var i = 0; i < nbFilm; i++){
-        this.getFilmById("tt" + getRandomID().toString())
+        this.getMediaById("tt" + getRandomID().toString())
         .then((data)=>{
           if(data['Response'] == 'True'){
             this.getPosterById(data['imdbID'])
@@ -39,7 +39,7 @@ export class OMDbApiProvider {
     });
   }
 
-  public getFilmById = (id:string) =>{
+  public getMediaById = (id:string) =>{
     return new Promise((resolve, reject) =>{
       this.http.get(this.urlAPIFilm + "i=" + id)
       .subscribe((data)=>{
@@ -62,18 +62,14 @@ export class OMDbApiProvider {
     });
   }
 
-  public getFilms = (title: string)=>{
+  public getMedias = (title: string, media: string)=>{
     return new Promise((resolve,reject)=>{
-      this.http.get(this.urlAPIFilm + "type=movie&s=" + title)
+      this.http.get(this.urlAPIFilm + "type=" + media + "&s=" + title)
       .subscribe((data)=>{
         resolve(data);
       }, (err) =>{
         reject(err);
       });
     });
-  }
-
-  public getSeries = ()=>{
-
   }
 }

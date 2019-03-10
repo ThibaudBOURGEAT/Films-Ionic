@@ -1,24 +1,29 @@
 import { Component } from '@angular/core';
-import { NavController, Events, AlertController, NavParams } from 'ionic-angular';
+import { NavController, AlertController, NavParams } from 'ionic-angular';
 import { OMDbApiProvider } from '../../providers/OMDb-api/OMDb-api';
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 import { DescribePage } from '../describe/describe';
 
 @Component({
-  selector: 'page-films',
-  templateUrl: 'films.html',
+  selector: 'page-media',
+  templateUrl: 'media.html',
 })
-export class FilmsPage {
+export class MediaPage {
 
   private displaySearchbar: boolean;
-  private films: any;
+  private medias: any;
+  private typeMedia: string;
 
   constructor(private omdb: OMDbApiProvider,
     private alertCtrl: AlertController,
     public navCtrl: NavController,
-    private events: Events,
     public navParams: NavParams,
     private nativePageTransitions: NativePageTransitions) {
+  }
+
+  ionViewDidEnter(){
+    this.typeMedia = this.navParams.data;
+    console.log("Params", this.navParams.data);
   }
 
   public DisplaySearchbar = () =>{
@@ -33,44 +38,29 @@ export class FilmsPage {
     }
   }
 
-  private Films = () => {
-    return this.films;
+  private Medias = () => {
+    return this.medias;
   }
 
-  public goToDescribeOfFilm = (id:string) =>{
+  public goToDescribeOfMedia = (id:string) =>{
     let options: NativeTransitionOptions = {
       direction: 'left',
       duration: 600
     };
 
     this.nativePageTransitions.flip(options);
-    this.navCtrl.push(DescribePage, {id: id});
+    this.navCtrl.push(DescribePage, {id: id, typeMedia: this.typeMedia});
   }
 
-  private getFilmsFromAPI = (title: string) => {
-    this.omdb.getFilms(title)
-      .then((films) => {
-        this.films = films['Search'];
-      })
-      .catch((err) => {
-        const alert = this.alertCtrl.create({
-          title: 'Erreur !',
-          subTitle: 'Impossible de récuperer les films !',
-          buttons: ['OK']
-        });
-        alert.present();
-      });
-  }
-
-  public searchFilms = (ev: any) => {
+  public searchMedias = (ev: any) => {
     const val = ev.target.value;
     console.log("val",val);
     if (val && val.trim() != '') {
-      this.omdb.getFilms(val)
-        .then((films) => {
-          console.log("films", films);
-          this.films = films['Search'];
-          console.log("films", this.films);
+      this.omdb.getMedias(val, this.typeMedia)
+        .then((medias) => {
+          console.log("films", medias);
+          this.medias = medias['Search'];
+          console.log("films", this.medias);
         })
         .catch((err) => {
           const alert = this.alertCtrl.create({

@@ -9,7 +9,7 @@ import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/na
 })
 export class DescribePage {
 
-  film:any;
+  media:any;
   poster:string;
 
   constructor(public navCtrl: NavController,
@@ -18,22 +18,23 @@ export class DescribePage {
     private nativePageTransitions: NativePageTransitions,
     private omdb: OMDbApiProvider) {
       let id = navParams.get('id');
-      this.getFilm(id);
+      this.getMedia(id);
   }
 
-  public Film = () =>{
-    return this.film;
+  public Media = () =>{
+    return this.media;
   }
 
-  private getFilm = (id:string) =>{
-    this.omdb.getFilmById(id)
-    .then((film) =>{
-      this.film = film; 
+  private getMedia = (id:string) =>{
+    this.omdb.getMediaById(id)
+    .then((media) =>{
+      console.log("media", media);
+      this.media = media; 
     })
     .catch((err) =>{
       const alert = this.alertCtrl.create({
         title: 'Erreur !',
-        subTitle: 'Impossible de récuperer les informations du film !',
+        subTitle: "Impossible de récuperer les informations de l'oeuvre !",
         buttons: ['OK']
       });
       alert.present();
