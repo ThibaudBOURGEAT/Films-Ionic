@@ -23,7 +23,6 @@ export class MediaPage {
 
   ionViewDidEnter(){
     this.typeMedia = this.navParams.data;
-    console.log("Params", this.navParams.data);
   }
 
   public DisplaySearchbar = () =>{
@@ -54,15 +53,13 @@ export class MediaPage {
 
   public searchMedias = (ev: any) => {
     const val = ev.target.value;
-    console.log("val",val);
     if (val && val.trim() != '') {
       this.omdb.getMedias(val, this.typeMedia)
         .then((medias) => {
-          console.log("films", medias);
           this.medias = medias['Search'];
-          console.log("films", this.medias);
         })
         .catch((err) => {
+          console.log("searchMedias", err);
           const alert = this.alertCtrl.create({
             title: 'Erreur !',
             subTitle: 'Impossible de récuperer les films !',
