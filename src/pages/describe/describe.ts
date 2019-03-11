@@ -5,6 +5,7 @@ import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/na
 import { Serie } from '../../models/serie';
 import { Movie } from  '../../models/movie';
 import { Episode } from '../../models/episode';
+import { EpisodePage } from '../episode/episode';
 
 @Component({
   selector: 'page-describe',
@@ -80,8 +81,16 @@ export class DescribePage {
       direction: 'left',
       duration: 600
     };
-
     this.nativePageTransitions.flip(options);
     this.navCtrl.pop();
+  }
+
+  public goToEpisode = (episode:Episode) =>{
+    let options: NativeTransitionOptions = {
+      direction: 'left',
+      duration: 600
+    };
+    this.nativePageTransitions.flip(options);
+    this.navCtrl.push(EpisodePage, {episode: episode});
   }
 }

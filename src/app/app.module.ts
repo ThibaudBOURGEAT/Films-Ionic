@@ -10,6 +10,7 @@ import { NativePageTransitions } from '@ionic-native/native-page-transitions';
 import { MyApp } from './app.component';
 import { DescribePage } from '../pages/describe/describe';
 import { MediaPage } from '../pages/media/media';
+import { EpisodePage } from '../pages/episode/episode';
 import { TabsComponent } from '../components/tabs/tabs';
 import { OMDbApiProvider } from '../providers/OMDb-api/OMDb-api';
 
@@ -18,7 +19,8 @@ import { OMDbApiProvider } from '../providers/OMDb-api/OMDb-api';
     MyApp,
     DescribePage,
     MediaPage,
-    TabsComponent
+    TabsComponent,
+    EpisodePage
   ],
   imports: [
     BrowserModule,
@@ -30,6 +32,7 @@ import { OMDbApiProvider } from '../providers/OMDb-api/OMDb-api';
     MyApp,
     DescribePage,
     MediaPage,
+    EpisodePage,
     TabsComponent
   ],
   providers: [
