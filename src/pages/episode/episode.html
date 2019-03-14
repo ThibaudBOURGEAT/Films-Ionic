@@ -8,5 +8,29 @@
 
 
 <ion-content padding>
-
+  <ion-content padding>
+    <ion-card *ngIf="episode != null">
+      <ion-card-content>
+        <div>
+            <ion-card-title>
+                <b>Episode {{ episode.Episode }} :</b> {{ episode.title }}
+              </ion-card-title>
+              <p>
+                <b>Description : </b> {{episode.description}}
+              </p>
+              <p>
+                <b>Date : </b> {{episode.released}}
+              </p>
+              <p>
+                <b>Durée : </b> {{episode.runtime}}
+              </p>
+              <p>
+                <b>Nombre de votes : </b> {{episode.votes}}
+              </p>
+              <p>
+                <b>Note : </b> {{episode.rating}}
+              </p>
+        </div>
+      </ion-card-content>
+    </ion-card>
 </ion-content>
