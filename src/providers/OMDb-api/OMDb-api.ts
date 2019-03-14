@@ -80,4 +80,15 @@ export class OMDbApiProvider {
       })
     });
   }
+
+  public getEpisodeById = (id:string) =>{
+    return new Promise((resolve,reject)=>{
+      this.http.get(this.urlAPIFilm + "i=" + id)
+      .subscribe((data) =>{
+        resolve(data);
+      }, (err)=>{
+        reject(err);
+      });
+    });
+  }
 }

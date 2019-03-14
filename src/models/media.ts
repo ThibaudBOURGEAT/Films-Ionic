@@ -28,28 +28,4 @@ export class Media {
             this.imdbRating = media['imdbRating'];
             this.webSite = media['Website'];
     }
-
-    public Id = () =>{
-        return this.id;
-    }
-
-    public Title = () =>{
-        return this.title;
-    }
-
-    public Poster = () =>{
-        return this.poster;
-    }
-
-    public Description = () =>{
-        return this.description;
-    }
-
-    public Date = () =>{
-        return this.date;
-    }
-
-    public TypeMedia = () =>{
-        return this.typeMedia;
-    }
 }
