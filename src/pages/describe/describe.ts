@@ -4,7 +4,9 @@ import { OMDbApiProvider } from '../../providers/OMDb-api/OMDb-api';
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 import { Serie } from '../../models/serie';
 import { Movie } from  '../../models/movie';
+import { Media } from  '../../models/media';
 import { SaisonPage } from '../saison/saison';
+import { FavoritesProvider } from '../../providers/favorites/favorites';
 
 @Component({
   selector: 'page-describe',
@@ -12,7 +14,7 @@ import { SaisonPage } from '../saison/saison';
 })
 export class DescribePage {
 
-  private media:object;
+  private media:Media;
   private typeMedia: string;
   private saisons: number[];
 
@@ -20,10 +22,15 @@ export class DescribePage {
     public navParams: NavParams,
     private alertCtrl: AlertController,
     private nativePageTransitions: NativePageTransitions,
-    private omdb: OMDbApiProvider) {
+    private omdb: OMDbApiProvider,
+    private favorites: FavoritesProvider) {
       let id = navParams.get('id');
       this.typeMedia = navParams.get('typeMedia');
       this.getMedia(id);
+      this.favorites.getAllMedias()
+      .then((value)=>{
+        console.log("media", value);
+      });
   }
 
   public Media = () =>{
@@ -75,4 +82,17 @@ export class DescribePage {
     this.nativePageTransitions.flip(options);
     this.navCtrl.push(SaisonPage, {id: id, num:num});
   }
+
+  public addFavorite = () =>{
+    this.favorites.addMedia(this.media);
+  }
+
+  public checkFavorite = () =>{
+    return this.favorites.checkMediaExist(this.media);
+  }
+
+  public removeFavorite = () =>{
+    this.favorites.removeMedia(this.media);
+  }
+
 }

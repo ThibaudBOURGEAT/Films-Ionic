@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, AlertController, NavParams } from 'ionic-angular';
 import { OMDbApiProvider } from '../../providers/OMDb-api/OMDb-api';
 import { Episode } from '../../models/episode';
+import { FavoritesProvider } from '../../providers/favorites/favorites';
 
 @Component({
   selector: 'page-episode',
@@ -15,7 +16,8 @@ export class EpisodePage {
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     private omdb: OMDbApiProvider,
-    private alertCtrl: AlertController) {
+    private alertCtrl: AlertController,
+    private favorites: FavoritesProvider) {
       this.id = this.navParams.get('id');
       this.getEpisode();
   }
@@ -34,6 +36,10 @@ export class EpisodePage {
       });
       alert.present();
     });
+  }
+
+  public addFavorite(){
+    this.favorites.addEpisode(this.episode);
   }
 
 }

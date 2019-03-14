@@ -8,6 +8,13 @@
   <ion-card *ngIf="Media() != null">
     <img *ngIf="Media().poster != null" src="{{Media().poster}}" />
     <ion-card-content>
+      <button *ngIf="!checkFavorite()" ion-button secondary full (click)="addFavorite()">
+        <div >Ajouter aux Favoris</div>
+        <ion-icon name="star" item-start style="margin-left: 10px;"></ion-icon> 
+      </button>
+      <button *ngIf="checkFavorite()" ion-button color="danger" full (click)="removeFavorite()">
+          <div >Retirer des Favoris</div>
+      </button>
       <ion-card-title>
         <b>Titre : </b>{{Media().title}}
       </ion-card-title>
@@ -23,7 +30,7 @@
       <p>
         <b>Genre : </b> {{Media().genre}}
       </p>
-      <p *ngIf="typeMedia == 'movie'">
+      <p *ngIf="Media().typeMedia == 'film'">
         <b>Durée : </b> {{Media().runTime}}
       </p>
       <p>

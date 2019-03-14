@@ -15,6 +15,8 @@ import { SaisonPage } from '../pages/saison/saison';
 
 import { TabsComponent } from '../components/tabs/tabs';
 import { OMDbApiProvider } from '../providers/OMDb-api/OMDb-api';
+import { FavoritesProvider } from '../providers/favorites/favorites';
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { OMDbApiProvider } from '../providers/OMDb-api/OMDb-api';
   imports: [
     BrowserModule,
     HttpClientModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -45,7 +48,8 @@ import { OMDbApiProvider } from '../providers/OMDb-api/OMDb-api';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     OMDbApiProvider,
     HttpClient,
-    NativePageTransitions
+    NativePageTransitions,
+    FavoritesProvider
   ]
 })
 export class AppModule {}
