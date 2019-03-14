@@ -37,6 +37,7 @@ export class DescribePage {
       } else {
         this.getSaisons(media);
       }
+      console.log("serie",this.media);
     })
     .catch((err) =>{
       console.log("getMedia", err);

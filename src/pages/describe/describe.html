@@ -6,7 +6,7 @@
 
 <ion-content padding>
   <ion-card *ngIf="Media() != null">
-    <img *ngIf="Media().Poster != null" src="{{Media().poster}}"/>
+    <img *ngIf="Media().Poster != null" src="{{Media().poster}}" />
     <ion-card-content>
       <ion-card-title>
         <b>Titre : </b>{{Media().title}}
@@ -23,7 +23,7 @@
       <p>
         <b>Genre : </b> {{Media().genre}}
       </p>
-      <p *ngIf="typeMedia == 'movie'">
+      <p *ngIf="Media().typeMedia == 'film'">
         <b>Durée : </b> {{Media().runTime}}
       </p>
       <p>
@@ -41,9 +41,20 @@
       <p>
         <b>Site Web : </b> {{Media().webSite}}
       </p>
+      <p *ngIf="Media().typeMedia == 'serie'">
+        <b>Saisons : </b>
+      </p>
+      <div *ngIf="Media().typeMedia == 'serie'">
+        <ion-list *ngFor="let saison of Media().saisons; let saisonIndex = index">
+          <ion-item>Saison {{ saisonIndex + 1 }}</ion-item>         
+          <ion-item *ngFor="let episode of Media().saisons[saisonIndex]">Episode {{ episode.number }}</ion-item>
+        </ion-list>
+      </div>
     </ion-card-content>
   </ion-card>
   <ion-fab right bottom>
-    <button ion-fab color="dark" (click)="goBack()"><ion-icon name="arrow-dropleft"></ion-icon></button>
+    <button ion-fab color="dark" (click)="goBack()">
+      <ion-icon name="arrow-dropleft"></ion-icon>
+    </button>
   </ion-fab>
 </ion-content>

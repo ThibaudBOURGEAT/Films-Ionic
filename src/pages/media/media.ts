@@ -46,7 +46,6 @@ export class MediaPage {
       direction: 'left',
       duration: 600
     };
-
     this.nativePageTransitions.flip(options);
     this.navCtrl.push(DescribePage, {id: id, typeMedia: this.typeMedia});
   }
