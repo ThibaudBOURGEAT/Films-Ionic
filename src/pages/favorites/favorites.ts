@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { FavoritesProvider } from '../../providers/favorites/favorites';
-import { Media } from '../../models/media';
-import { Episode } from '../../models/episode';
 import { DescribePage } from '../../pages/describe/describe';
 import { EpisodePage } from '../../pages/episode/episode';
 
@@ -37,14 +35,6 @@ export class FavoritesPage {
     .then((episode) =>{
       this.episodes = episode;
     });
-  }
-
-  public removeFromMediasFavorites = (media: Media) =>{
-    this.favorites.removeMedia(media);
-  }
-
-  public removeFromEpisodesFavorites = (episode: Episode) =>{
-    this.favorites.removeEpisode(episode);
   }
 
   public goToDescribeOfMedia = (id:string) =>{
