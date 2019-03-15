@@ -13,7 +13,7 @@
     <ion-searchbar *ngIf="DisplaySearchbar()" (ionInput)="searchMedias($event)"></ion-searchbar>
     <ion-list *ngIf="Medias() != null">
       <div *ngFor="let media of Medias()">
-        <ion-card *ngIf="media != null" (click)="goToDescribeOfMedia(media.imdbID)" >
+        <ion-card class="card-change" *ngIf="media != null" (click)="goToDescribeOfMedia(media.imdbID)" >
           <img *ngIf="media.Poster != null" src="{{media.Poster}}"/>
           <div class="card-title">{{ media.Title }}</div>
         </ion-card>
