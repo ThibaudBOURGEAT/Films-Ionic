@@ -10,27 +10,40 @@ import { NativePageTransitions } from '@ionic-native/native-page-transitions';
 import { MyApp } from './app.component';
 import { DescribePage } from '../pages/describe/describe';
 import { MediaPage } from '../pages/media/media';
+import { EpisodePage } from '../pages/episode/episode';
+import { SaisonPage } from '../pages/saison/saison';
+import { FavoritesPage } from '../pages/favorites/favorites';
+
 import { TabsComponent } from '../components/tabs/tabs';
 import { OMDbApiProvider } from '../providers/OMDb-api/OMDb-api';
+import { FavoritesProvider } from '../providers/favorites/favorites';
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
   declarations: [
     MyApp,
     DescribePage,
     MediaPage,
-    TabsComponent
+    TabsComponent,
+    EpisodePage,
+    SaisonPage,
+    FavoritesPage
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     DescribePage,
     MediaPage,
-    TabsComponent
+    EpisodePage,
+    SaisonPage,
+    TabsComponent,
+    FavoritesPage
   ],
   providers: [
     StatusBar,
@@ -38,7 +51,8 @@ import { OMDbApiProvider } from '../providers/OMDb-api/OMDb-api';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     OMDbApiProvider,
     HttpClient,
-    NativePageTransitions
+    NativePageTransitions,
+    FavoritesProvider
   ]
 })
 export class AppModule {}

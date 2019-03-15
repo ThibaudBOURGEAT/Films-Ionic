@@ -6,8 +6,15 @@
 
 <ion-content padding>
   <ion-card *ngIf="Media() != null">
-    <img *ngIf="Media().Poster != null" src="{{Media().poster}}"/>
+    <img *ngIf="Media().poster != null" src="{{Media().poster}}" />
     <ion-card-content>
+      <button *ngIf="!checkFavorite()" ion-button secondary full (click)="addFavorite()">
+        <div >Ajouter aux Favoris</div>
+        <ion-icon name="star" item-start style="margin-left: 10px;"></ion-icon> 
+      </button>
+      <button *ngIf="checkFavorite()" ion-button color="danger" full (click)="removeFavorite()">
+          <div >Retirer des Favoris</div>
+      </button>
       <ion-card-title>
         <b>Titre : </b>{{Media().title}}
       </ion-card-title>
@@ -23,7 +30,7 @@
       <p>
         <b>Genre : </b> {{Media().genre}}
       </p>
-      <p *ngIf="typeMedia == 'movie'">
+      <p *ngIf="Media().typeMedia == 'film'">
         <b>Durée : </b> {{Media().runTime}}
       </p>
       <p>
@@ -41,9 +48,25 @@
       <p>
         <b>Site Web : </b> {{Media().webSite}}
       </p>
+      <p *ngIf="Media().typeMedia == 'serie'">
+        <b>Saisons : </b>
+      </p>
+      <div *ngIf="Media().typeMedia == 'serie'">
+        <ion-list>
+          <ion-item-group *ngFor="let saison of saisons">
+            <ion-item>
+              <ion-label (click)="goToSaison(Media().id, saison + 1)">
+                <b>Saison {{ saison + 1 }}</b>
+              </ion-label>
+            </ion-item>
+          </ion-item-group>
+        </ion-list>
+      </div>
     </ion-card-content>
   </ion-card>
   <ion-fab right bottom>
-    <button ion-fab color="dark" (click)="goBack()"><ion-icon name="arrow-dropleft"></ion-icon></button>
+    <button ion-fab color="dark" (click)="goBack()">
+      <ion-icon name="arrow-dropleft"></ion-icon>
+    </button>
   </ion-fab>
 </ion-content>

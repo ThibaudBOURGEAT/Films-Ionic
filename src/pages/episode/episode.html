@@ -1,0 +1,43 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Episode</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-content padding>
+    <ion-card *ngIf="episode != null">
+      <ion-card-content>
+        <div>
+            <ion-card-title>
+                <b>Episode {{ episode.Episode }} :</b> {{ episode.title }}
+              </ion-card-title>
+              <p>
+                <b>Description : </b> {{episode.description}}
+              </p>
+              <p>
+                <b>Date : </b> {{episode.released}}
+              </p>
+              <p>
+                <b>Durée : </b> {{episode.runtime}}
+              </p>
+              <p>
+                <b>Nombre de votes : </b> {{episode.votes}}
+              </p>
+              <p>
+                <b>Note : </b> {{episode.rating}}
+              </p>
+              <button *ngIf="!checkFavorite()" ion-button secondary full (click)="addFavorite()">
+                  <div >Ajouter aux Favoris</div>
+                  <ion-icon name="star" item-start style="margin-left: 10px;"></ion-icon> 
+              </button>
+              <button *ngIf="checkFavorite()" ion-button color="danger" full (click)="removeFavorite()">
+                    <div >Retirer des Favoris</div>
+              </button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+</ion-content>

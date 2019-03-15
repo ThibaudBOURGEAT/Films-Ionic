@@ -1,0 +1,23 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Saison</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-content padding>
+    <ion-card *ngIf="saison != null">
+      <ion-card-content>
+        <ion-card-title>
+          <b>Saison {{ num }}</b>
+        </ion-card-title>
+        <div *ngFor="let episode of saison.Episodes" (click)="goToEpisode(episode.imdbID)">
+          <p>Episode {{ episode.Episode }}</p>
+          <br />
+        </div>
+      </ion-card-content>
+    </ion-card>
+</ion-content>

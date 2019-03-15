@@ -9,17 +9,13 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content class="card-background-page" padding>
     <ion-searchbar *ngIf="DisplaySearchbar()" (ionInput)="searchMedias($event)"></ion-searchbar>
     <ion-list *ngIf="Medias() != null">
       <div *ngFor="let media of Medias()">
         <ion-card *ngIf="media != null" (click)="goToDescribeOfMedia(media.imdbID)" >
           <img *ngIf="media.Poster != null" src="{{media.Poster}}"/>
-          <ion-card-content>
-            <ion-card-title>
-              <b>Titre : </b>{{ media.Title }}
-            </ion-card-title>
-          </ion-card-content>
+          <div class="card-title">{{ media.Title }}</div>
         </ion-card>
       </div>
     </ion-list>

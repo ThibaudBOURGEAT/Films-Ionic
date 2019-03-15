@@ -4,7 +4,9 @@ import { OMDbApiProvider } from '../../providers/OMDb-api/OMDb-api';
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 import { Serie } from '../../models/serie';
 import { Movie } from  '../../models/movie';
-import { Episode } from '../../models/episode';
+import { Media } from  '../../models/media';
+import { SaisonPage } from '../saison/saison';
+import { FavoritesProvider } from '../../providers/favorites/favorites';
 
 @Component({
   selector: 'page-describe',
@@ -12,14 +14,16 @@ import { Episode } from '../../models/episode';
 })
 export class DescribePage {
 
-  private media:object;
+  private media:Media;
   private typeMedia: string;
+  private saisons: number[];
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private alertCtrl: AlertController,
     private nativePageTransitions: NativePageTransitions,
-    private omdb: OMDbApiProvider) {
+    private omdb: OMDbApiProvider,
+    private favorites: FavoritesProvider) {
       let id = navParams.get('id');
       this.typeMedia = navParams.get('typeMedia');
       this.getMedia(id);
@@ -50,29 +54,11 @@ export class DescribePage {
   }
 
   private getSaisons = (serie:object) =>{
-    let lenght = Number(serie['totalSeasons']);
-    let saisons: Episode[][] = new Array();
-    for(let i:number = 0; i < lenght; i++){
-      this.omdb.getSaisonByNumberOfSerie(serie['imdbID'],i+1)
-      .then((value) => {
-        let saison: Episode[] = new Array();
-        value['Episodes'].forEach(epi => {
-          let episode = new Episode(epi);
-          saison.push(episode);
-        });
-        saisons.push(saison);
-      })
-      .catch((err) =>{
-        console.log("getSaisons", err);
-        const alert = this.alertCtrl.create({
-          title: 'Erreur !',
-          subTitle: "Impossible de récuperer les informations de la saison "+ i+1 +" !",
-          buttons: ['OK']
-        });
-        alert.present();
-      });
-    }
-    this.media = new Serie(serie, saisons);
+    this.media = new Serie(serie);
+    this.saisons = new Array();
+    for(let i = 0 ; i < this.media['totalSeasons'] ; i++){
+      this.saisons.push(i);
+    }  
   }
 
   public goBack = () =>{
@@ -80,8 +66,29 @@ export class DescribePage {
       direction: 'left',
       duration: 600
     };
-
     this.nativePageTransitions.flip(options);
     this.navCtrl.pop();
   }
+
+  public goToSaison = (id:string, num: number) =>{
+    let options: NativeTransitionOptions = {
+      direction: 'left',
+      duration: 600
+    };
+    this.nativePageTransitions.flip(options);
+    this.navCtrl.push(SaisonPage, {id: id, num:num});
+  }
+
+  public addFavorite = () =>{
+    this.favorites.addMedia(this.media);
+  }
+
+  public checkFavorite = () =>{
+    return this.favorites.checkMediaExist(this.media);
+  }
+
+  public removeFavorite = () =>{
+    this.favorites.removeMedia(this.media);
+  }
+
 }
