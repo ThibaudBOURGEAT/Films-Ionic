@@ -7,7 +7,7 @@ import { Movie } from '../../models/movie';
 import { Media } from '../../models/media';
 import { SaisonPage } from '../saison/saison';
 import { FavoritesProvider } from '../../providers/favorites/favorites';
-import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
+import { FileTransfer } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 
 @Component({
@@ -19,7 +19,6 @@ export class DescribePage {
   private media: Media;
   private typeMedia: string;
   private saisons: number[];
-  private fileTransfer: FileTransferObject;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -32,8 +31,6 @@ export class DescribePage {
     let id = navParams.get('id');
     this.typeMedia = navParams.get('typeMedia');
     this.getMedia(id);
-    this.fileTransfer = this.transfer.create();
-    console.log("file", this.file.dataDirectory);
   }
 
   public Media = () => {
@@ -100,10 +97,11 @@ export class DescribePage {
 
   public downloadPicture = () => {
     const url = this.media['poster'];
+    const fileTransfer = this.transfer.create();
     let dir = 'Download';
     this.file.createDir(this.file.externalRootDirectory, dir, true)
       .then((data) => {
-        this.fileTransfer.download(url, data.toURL() + this.media['title'] + '.png')
+        fileTransfer.download(url, data.toURL() + this.media['title'] + '.png')
           .then((entry) => {
             const alert = this.alertCtrl.create({
               title: 'Réussie !',

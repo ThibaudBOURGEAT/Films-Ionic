@@ -11,11 +11,16 @@ import { EpisodePage } from '../../pages/episode/episode';
 export class FavoritesPage {
 
   private medias: object;
-  private episodes: object;  
+  private episodes: object;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams, 
-    private favorites: FavoritesProvider) {
+    private favorites: FavoritesProvider,
+    ) {
+  }
+
+  public exportFavorites = (format: string) =>{
+    this.favorites.exportFavorites(format);
   }
 
   ionViewDidEnter(){

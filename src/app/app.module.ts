@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NativePageTransitions } from '@ionic-native/native-page-transitions';
 import { FileTransfer } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
+import { AndroidPermissions } from '@ionic-native/android-permissions';
 
 import { MyApp } from './app.component';
 import { DescribePage } from '../pages/describe/describe';
@@ -56,7 +57,8 @@ import { IonicStorageModule } from '@ionic/storage';
     NativePageTransitions,
     FavoritesProvider,
     FileTransfer,
-    File
+    File,
+    AndroidPermissions
   ]
 })
 export class AppModule {}
