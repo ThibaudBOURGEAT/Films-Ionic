@@ -6,6 +6,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { NativePageTransitions } from '@ionic-native/native-page-transitions';
+import { FileTransfer } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
 
 import { MyApp } from './app.component';
 import { DescribePage } from '../pages/describe/describe';
@@ -52,7 +54,9 @@ import { IonicStorageModule } from '@ionic/storage';
     OMDbApiProvider,
     HttpClient,
     NativePageTransitions,
-    FavoritesProvider
+    FavoritesProvider,
+    FileTransfer,
+    File
   ]
 })
 export class AppModule {}

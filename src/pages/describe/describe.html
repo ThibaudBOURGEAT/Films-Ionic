@@ -15,6 +15,10 @@
       <button *ngIf="checkFavorite()" ion-button color="danger" full (click)="removeFavorite()">
           <div >Retirer des Favoris</div>
       </button>
+      <button ion-button secondary full (click)="downloadPicture()">
+          <div >Télécharger l'image</div>
+          <ion-icon name="download" style="margin-left: 10px;"></ion-icon>
+      </button>
       <ion-card-title>
         <b>Titre : </b>{{Media().title}}
       </ion-card-title>
