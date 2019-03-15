@@ -27,10 +27,6 @@ export class DescribePage {
       let id = navParams.get('id');
       this.typeMedia = navParams.get('typeMedia');
       this.getMedia(id);
-      this.favorites.getAllMedias()
-      .then((value)=>{
-        console.log("media", value);
-      });
   }
 
   public Media = () =>{

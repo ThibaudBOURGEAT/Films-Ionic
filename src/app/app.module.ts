@@ -12,6 +12,7 @@ import { DescribePage } from '../pages/describe/describe';
 import { MediaPage } from '../pages/media/media';
 import { EpisodePage } from '../pages/episode/episode';
 import { SaisonPage } from '../pages/saison/saison';
+import { FavoritesPage } from '../pages/favorites/favorites';
 
 import { TabsComponent } from '../components/tabs/tabs';
 import { OMDbApiProvider } from '../providers/OMDb-api/OMDb-api';
@@ -25,7 +26,8 @@ import { IonicStorageModule } from '@ionic/storage';
     MediaPage,
     TabsComponent,
     EpisodePage,
-    SaisonPage
+    SaisonPage,
+    FavoritesPage
   ],
   imports: [
     BrowserModule,
@@ -40,7 +42,8 @@ import { IonicStorageModule } from '@ionic/storage';
     MediaPage,
     EpisodePage,
     SaisonPage,
-    TabsComponent
+    TabsComponent,
+    FavoritesPage
   ],
   providers: [
     StatusBar,

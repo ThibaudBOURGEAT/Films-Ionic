@@ -14,15 +14,16 @@ export class FavoritesProvider {
 
   constructor(public http: HttpClient,
     private storage: Storage) {
-      this.storage.clear()
       this.medias = new Array();
       this.episodes = new Array();
+
       this.storage.get('medias')
       .then((medias)=>{
         if(medias != null){
           this.medias = medias;
         }
       });
+
       this.storage.get('episodes')
       .then((episodes)=>{
         if(episodes != null){
@@ -98,6 +99,6 @@ export class FavoritesProvider {
         this.episodes.splice(index,1);
       }
     });
-    this.storage.set('medias', this.episodes);
+    this.storage.set('episodes', this.episodes);
   }
 }
