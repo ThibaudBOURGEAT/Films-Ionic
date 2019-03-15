@@ -38,8 +38,16 @@ export class EpisodePage {
     });
   }
 
-  public addFavorite(){
+  public addFavorite = () =>{
     this.favorites.addEpisode(this.episode);
+  }
+
+  public checkFavorite = () =>{
+    return this.favorites.checkEpisodeExist(this.episode);
+  }
+
+  public removeFavorite = () =>{
+    this.favorites.removeEpisode(this.episode);
   }
 
 }

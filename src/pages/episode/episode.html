@@ -30,6 +30,13 @@
               <p>
                 <b>Note : </b> {{episode.rating}}
               </p>
+              <button *ngIf="!checkFavorite()" ion-button secondary full (click)="addFavorite()">
+                  <div >Ajouter aux Favoris</div>
+                  <ion-icon name="star" item-start style="margin-left: 10px;"></ion-icon> 
+              </button>
+              <button *ngIf="checkFavorite()" ion-button color="danger" full (click)="removeFavorite()">
+                    <div >Retirer des Favoris</div>
+              </button>
         </div>
       </ion-card-content>
     </ion-card>
