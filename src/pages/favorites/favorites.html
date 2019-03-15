@@ -1,0 +1,40 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Favoris</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-item>
+    <ion-label><h2>Films / Séries</h2></ion-label>
+  </ion-item>
+  <ion-list *ngIf="medias != null">
+    <div *ngFor="let media of medias">
+      <ion-card *ngIf="media != null" (click)="goToDescribeOfMedia(media.id)">
+        <img *ngIf="media.poster != null" src="{{media.poster}}" />
+        <ion-card-content>
+          <ion-card-title>
+            <b>Titre : </b>{{ media.title }}
+          </ion-card-title>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </ion-list>
+   <ion-item>
+     <ion-label><h2>Episode</h2></ion-label>
+  </ion-item>
+  <ion-list *ngIf="episodes != null">
+    <div *ngFor="let episode of episodes">
+      <ion-card *ngIf="episode != null" (click)="goToEpisode(episode.id)">
+        <ion-card-content>
+          <ion-card-title>
+            <b>Titre : </b>{{ episode.title }}
+          </ion-card-title>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </ion-list>
+</ion-content>
