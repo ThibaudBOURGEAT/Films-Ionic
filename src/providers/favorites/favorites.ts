@@ -7,6 +7,7 @@ import { Episode } from '../../models/episode';
 import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
+import { default as json2csv } from 'json2csv';
 
 @Injectable()
 export class FavoritesProvider {
@@ -36,7 +37,7 @@ export class FavoritesProvider {
       });
   }
 
-  private AskPermission = (permission: string) => {
+  private askPermissionAndroid = (permission: string) => {
     return new Promise((resolve) => {
       this.permissions.checkPermission(permission).then(
         result => {
@@ -50,13 +51,20 @@ export class FavoritesProvider {
   }
 
   public exportFavorites = (format: string) => {
-    this.AskPermission(this.permissions.PERMISSION.WRITE_EXTERNAL_STORAGE)
+    this.askPermissionAndroid(this.permissions.PERMISSION.WRITE_EXTERNAL_STORAGE)
       .then(() => {
+        let fileFormat: string;
+        if(format == "csv"){
+          fileFormat = json2csv.parse({medias:this.medias, episodes:this.episodes});
+        }else{
+          fileFormat = encodeURIComponent(
+            JSON.stringify({medias:this.medias, episodes:this.episodes}));
+        }
+        console.log("fileFormat",fileFormat);
+
         let file = new File();
         const fileTransfer: FileTransferObject = this.transfer.create();
-        fileTransfer.download('data:text/json;charset=utf8,' + encodeURIComponent(
-          JSON.stringify({medias:this.medias, episodes:this.episodes})
-          ),
+        fileTransfer.download('data:text/json;charset=utf8,' + fileFormat,
           file.externalRootDirectory + "Download/favorites." + format)
           .then(() => {
             const alert = this.alertCtrl.create({
