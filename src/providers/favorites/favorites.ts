@@ -55,13 +55,13 @@ export class FavoritesProvider {
       .then(() => {
         let fileFormat: string;
         if(format == "csv"){
-          fileFormat = json2csv.parse({medias:this.medias, episodes:this.episodes});
+          let json: object[] = this.medias;
+          json.concat(this.episodes);
+          fileFormat = json2csv.parse(json);
         }else{
           fileFormat = encodeURIComponent(
             JSON.stringify({medias:this.medias, episodes:this.episodes}));
         }
-        console.log("fileFormat",fileFormat);
-
         let file = new File();
         const fileTransfer: FileTransferObject = this.transfer.create();
         fileTransfer.download('data:text/json;charset=utf8,' + fileFormat,
