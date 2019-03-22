@@ -45,7 +45,8 @@ export class FavoritesPage {
   public importFavorites = (format: string) =>{
     this.favorites.importFavorites()
     .then(()=>{
-      //TODO reload page
+      this.getMedias();
+      this.getEpisodes();
       const alert = this.alertCtrl.create({
         title: 'Réussie !',
         subTitle: "Favoris importés !",
