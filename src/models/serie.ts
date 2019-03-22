@@ -2,7 +2,7 @@ import { Media } from "./media";
 
 export class Serie extends Media{
 
-    private totalSeasons: number;
+    public totalSeasons: number;
 
     constructor(serie: object){
         super(serie);

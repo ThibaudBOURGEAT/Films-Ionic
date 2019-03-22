@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, NavParams } from 'ionic-angular';
 import { OMDbApiProvider } from '../../providers/OMDb-api/OMDb-api';
-import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 import { Serie } from '../../models/serie';
 import { Movie } from '../../models/movie';
 import { Media } from '../../models/media';
@@ -23,7 +22,6 @@ export class DescribePage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private alertCtrl: AlertController,
-    private nativePageTransitions: NativePageTransitions,
     private omdb: OMDbApiProvider,
     private favorites: FavoritesProvider,
     private transfer: FileTransfer,
@@ -66,20 +64,10 @@ export class DescribePage {
   }
 
   public goBack = () => {
-    let options: NativeTransitionOptions = {
-      direction: 'left',
-      duration: 600
-    };
-    this.nativePageTransitions.flip(options);
     this.navCtrl.pop();
   }
 
   public goToSaison = (id: string, num: number) => {
-    let options: NativeTransitionOptions = {
-      direction: 'left',
-      duration: 600
-    };
-    this.nativePageTransitions.flip(options);
     this.navCtrl.push(SaisonPage, { id: id, num: num });
   }
 

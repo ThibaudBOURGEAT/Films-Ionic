@@ -11,16 +11,19 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-          <button ion-button full secondary (click)="exportFavorites('json')">
-              <div>Export JSON</div>
-          </button>
+        <button ion-button full secondary (click)="exportFavorites('json')">
+          <div>Export JSON</div>
+        </button>
       </ion-col>
       <ion-col>
-          <button ion-button full secondary (click)="exportFavorites('csv')">
-              <div>Export CSV</div>
-          </button>
+        <button ion-button full secondary (click)="exportFavorites('csv')">
+          <div>Export CSV</div>
+        </button>
       </ion-col>
     </ion-row>
+    <button ion-button full secondary (click)="importFavorites('json')">
+      <div>Import Favoris</div>
+    </button>
   </ion-grid>
   <ion-item>
     <ion-label>

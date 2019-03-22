@@ -5,10 +5,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
-import { NativePageTransitions } from '@ionic-native/native-page-transitions';
 import { FileTransfer } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
+import { FileChooser } from '@ionic-native/file-chooser';
+import { FilePath } from '@ionic-native/file-path';
 
 import { MyApp } from './app.component';
 import { DescribePage } from '../pages/describe/describe';
@@ -54,11 +55,12 @@ import { IonicStorageModule } from '@ionic/storage';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     OMDbApiProvider,
     HttpClient,
-    NativePageTransitions,
     FavoritesProvider,
     FileTransfer,
     File,
-    AndroidPermissions
+    AndroidPermissions,
+    FileChooser,
+    FilePath
   ]
 })
 export class AppModule {}
