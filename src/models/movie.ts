@@ -2,7 +2,7 @@ import { Media } from "./media";
 
 export class Movie extends Media{
 
-    private runTime: string;
+    public runTime: string;
 
     constructor(film:object){
         super(film);

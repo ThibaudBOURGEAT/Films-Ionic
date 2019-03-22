@@ -1,17 +1,17 @@
 export class Media {
-    protected id: string;
-    protected title: string;
-    protected poster: string;
-    protected description: string;
-    protected date: string;
-    protected typeMedia: string;
-    protected rated: string;
-    protected genre: string;
-    protected producer: string;
-    protected actors: string;
-    protected awards: string;
-    protected imdbRating: string;
-    protected webSite: string;
+    public id: string;
+    public title: string;
+    public poster: string;
+    public description: string;
+    public date: string;
+    public typeMedia: string;
+    public rated: string;
+    public genre: string;
+    public producer: string;
+    public actors: string;
+    public awards: string;
+    public imdbRating: string;
+    public webSite: string;
 
     constructor(media: object){
             this.id = media['imdbID'];

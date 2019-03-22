@@ -1,13 +1,13 @@
 export class Episode {
 
-    private title: string;
-    private id: string;
-    private number: number;
-    private rating: string;
-    private released: string;
-    private runtime: string;
-    private description: string;
-    private votes: string;
+    public title: string;
+    public id: string;
+    public number: number;
+    public rating: string;
+    public released: string;
+    public runtime: string;
+    public description: string;
+    public votes: string;
 
     constructor(episode: object){
         this.title = episode['Title'];

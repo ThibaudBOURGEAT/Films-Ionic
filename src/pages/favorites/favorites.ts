@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { FavoritesProvider } from '../../providers/favorites/favorites';
 import { DescribePage } from '../../pages/describe/describe';
 import { EpisodePage } from '../../pages/episode/episode';
+import { AlertController } from 'ionic-angular';
 
 @Component({
   selector: 'page-favorites',
@@ -11,11 +12,56 @@ import { EpisodePage } from '../../pages/episode/episode';
 export class FavoritesPage {
 
   private medias: object;
-  private episodes: object;  
+  private episodes: object;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams, 
-    private favorites: FavoritesProvider) {
+    private favorites: FavoritesProvider,
+    private alertCtrl: AlertController
+    ) {
+  }
+
+  public exportFavorites = (format: string) =>{
+    this.favorites.exportFavorites(format)
+    .then(() =>{
+      const alert = this.alertCtrl.create({
+        title: 'Réussie !',
+        subTitle: "Favoris exportés !",
+        buttons: ['OK']
+      });
+      alert.present();
+    })
+    .catch((err)=>{
+      console.log("exportFavorites", err);
+      const alert = this.alertCtrl.create({
+        title: 'Erreur !',
+        subTitle: "Impossible d'exporter les favoris !",
+        buttons: ['OK']
+      });
+      alert.present();
+    });
+  }
+
+  public importFavorites = (format: string) =>{
+    this.favorites.importFavorites()
+    .then(()=>{
+      //TODO reload page
+      const alert = this.alertCtrl.create({
+        title: 'Réussie !',
+        subTitle: "Favoris importés !",
+        buttons: ['OK']
+      });
+      alert.present();
+    })
+    .catch((err)=>{
+      console.log("importFavorites", err);
+      const alert = this.alertCtrl.create({
+        title: 'Erreur !',
+        subTitle: "Impossible d'importer les favoris !",
+        buttons: ['OK']
+      });
+      alert.present();
+    });
   }
 
   ionViewDidEnter(){

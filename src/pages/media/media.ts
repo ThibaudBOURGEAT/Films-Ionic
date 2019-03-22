@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, NavParams } from 'ionic-angular';
 import { OMDbApiProvider } from '../../providers/OMDb-api/OMDb-api';
-import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 import { DescribePage } from '../describe/describe';
 
 @Component({
@@ -17,8 +16,7 @@ export class MediaPage {
   constructor(private omdb: OMDbApiProvider,
     private alertCtrl: AlertController,
     public navCtrl: NavController,
-    public navParams: NavParams,
-    private nativePageTransitions: NativePageTransitions) {
+    public navParams: NavParams) {
   }
 
   ionViewDidEnter(){
@@ -42,11 +40,6 @@ export class MediaPage {
   }
 
   public goToDescribeOfMedia = (id:string) =>{
-    let options: NativeTransitionOptions = {
-      direction: 'left',
-      duration: 600
-    };
-    this.nativePageTransitions.flip(options);
     this.navCtrl.push(DescribePage, {id: id, typeMedia: this.typeMedia});
   }
 
